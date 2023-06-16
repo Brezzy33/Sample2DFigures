@@ -1,42 +1,34 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Sample2DFigures.Interfaces;
 
-namespace Sample2DFigures.ViewModels
+namespace Sample2DFigures.ViewModels.FiguresVM
 {
-    internal class SquareViewModel : IFigureViewModel, INotifyPropertyChanged
+    internal abstract class FigureBaseViewModel : INotifyPropertyChanged
     {
-        private ISquare _square;
-        public SquareViewModel(ISquare square)
+        //Required for listbox item board and selection on canvas
+        private int _positionX;
+        public int PositionX
         {
-            _square = square;
-            Width = _square.Width;
-            Height = _square.Height;
-        }
-
-        private int _width;
-        public int Width
-        {
-            get => _width;
+            get => _positionX;
             set
             {
-                if (_width != value)
+                if (_positionX != value)
                 {
-                    _width = value;
+                    _positionX = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private int _height;
-        public int Height
+        private int _positionY;
+        public int PositionY
         {
-            get => _height;
+            get => _positionY;
             set
             {
-                if (_height != value)
+                if (_positionY != value)
                 {
-                    _height = value;
+                    _positionY = value;
                     OnPropertyChanged();
                 }
             }
@@ -45,12 +37,12 @@ namespace Sample2DFigures.ViewModels
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
-
     }
 }

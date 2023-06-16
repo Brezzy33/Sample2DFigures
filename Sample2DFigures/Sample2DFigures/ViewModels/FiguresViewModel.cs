@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Sample2DFigures.ViewModels.MenusVM;
+using Sample2DFigures.ViewModels.FiguresVM;
 
 namespace Sample2DFigures.ViewModels
 {
@@ -14,8 +15,8 @@ namespace Sample2DFigures.ViewModels
 
         #region Commands
 
-        private ICommand _showSquareMenuCommand;
-        public ICommand ShowSquareMenuCommand => _showSquareMenuCommand ??= new RelayCommand(() => SelectedMenuModel = _menus[1]);
+        private ICommand _showRectangleMenuCommand;
+        public ICommand ShowRectangleMenuCommand => _showRectangleMenuCommand ??= new RelayCommand(() => SelectedMenuModel = _menus[1]);
 
         private ICommand _showTriangleMenuCommand;
         public ICommand ShowTriangleMenuCommand => _showTriangleMenuCommand ??= new RelayCommand(() => SelectedMenuModel = _menus[0]);
@@ -29,23 +30,20 @@ namespace Sample2DFigures.ViewModels
 
         public FiguresViewModel()
         {
-            TriangleCollection = new ObservableCollection<TriangleViewModel?>();
-            SquareCollection = new ObservableCollection<SquareViewModel>();
+            FiguresCollection = new ObservableCollection<FigureBaseViewModel?>();
 
             _menus = new Dictionary<int, IMenuModel>
             {
                 {0, new TriangleMenuViewModel(this)},
-                {1, new SquareMenuViewModel(this)}
+                {1, new RectangleMenuViewModel(this)}
             };
             SelectedMenuModel = _menus[0];
         }
 
-        public ObservableCollection<TriangleViewModel?> TriangleCollection { get; set; }
+        public ObservableCollection<FigureBaseViewModel?> FiguresCollection { get; set; }
 
-        public ObservableCollection<SquareViewModel> SquareCollection { get; set; }
-
-        private IFigureViewModel _selectedFigureViewModel;
-        public IFigureViewModel SelectedFigureViewModel
+        private FigureBaseViewModel _selectedFigureViewModel;
+        public FigureBaseViewModel SelectedFigureViewModel
         {
             get => _selectedFigureViewModel;
             set
@@ -78,10 +76,10 @@ namespace Sample2DFigures.ViewModels
             switch (SelectedFigureViewModel)
             {
                 case TriangleViewModel:
-                    TriangleCollection.Remove((TriangleViewModel?)SelectedFigureViewModel);
+                    FiguresCollection.Remove((TriangleViewModel?)SelectedFigureViewModel);
                     break;
-                case SquareViewModel:
-                    SquareCollection.Remove((SquareViewModel)SelectedFigureViewModel);
+                case RectangleViewModel:
+                    FiguresCollection.Remove((RectangleViewModel)SelectedFigureViewModel);
                     break;
                 case null:
                     break;

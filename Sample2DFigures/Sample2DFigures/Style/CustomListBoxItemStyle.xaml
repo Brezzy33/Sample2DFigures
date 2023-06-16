@@ -3,6 +3,8 @@
 
     <!--To remove visual border on select list box item-->
     <Style x:Key="ListBoxItemStyleTransparentSelect" TargetType="ListBoxItem">
+        <Setter Property="Canvas.Left" Value="{Binding PositionX}" />
+        <Setter Property="Canvas.Top" Value="{Binding PositionY}" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">

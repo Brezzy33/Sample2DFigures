@@ -3,18 +3,19 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Sample2DFigures.Common;
 using Sample2DFigures.Model;
+using Sample2DFigures.ViewModels.FiguresVM;
 
 namespace Sample2DFigures.ViewModels.MenusVM
 {
-    internal class SquareMenuViewModel : INotifyPropertyChanged, IMenuModel
+    internal class RectangleMenuViewModel : INotifyPropertyChanged, IMenuModel
     {
         private readonly FiguresViewModel _figuresViewModel;
-        public SquareMenuViewModel(FiguresViewModel figuresViewModel)
+        public RectangleMenuViewModel(FiguresViewModel figuresViewModel)
         {
             _figuresViewModel = figuresViewModel;
         }
 
-        private int _width;
+        private int _width = 40;
         public int Width
         {
             get => _width;
@@ -28,7 +29,7 @@ namespace Sample2DFigures.ViewModels.MenusVM
             }
         }
 
-        private int _height;
+        private int _height = 40;
         public int Height
         {
             get => _height;
@@ -58,8 +59,8 @@ namespace Sample2DFigures.ViewModels.MenusVM
 
         #region Command
 
-        private ICommand _addSquareCommand;
-        public ICommand AddFigureCommand => _addSquareCommand ??= new RelayCommand(AddFigure);
+        private ICommand _addRectangleCommand;
+        public ICommand AddFigureCommand => _addRectangleCommand ??= new RelayCommand(AddFigure);
 
         #endregion
 
@@ -76,7 +77,7 @@ namespace Sample2DFigures.ViewModels.MenusVM
 
         private void AddFigure()
         {
-            _figuresViewModel.SquareCollection.Add(new SquareViewModel(Square.CreateInstance(Height, Width)));
+            _figuresViewModel.FiguresCollection.Add(new RectangleViewModel(Rectangle.CreateInstance(Height, Width, StartPoint)));
         }
     }
 }

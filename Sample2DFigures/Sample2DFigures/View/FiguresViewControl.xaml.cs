@@ -1,4 +1,5 @@
 ﻿using Sample2DFigures.ViewModels;
+using Sample2DFigures.ViewModels.FiguresVM;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using System.Windows.Shapes;
@@ -22,8 +23,8 @@ namespace Sample2DFigures.View
                 case Polygon polygon:
                     (DataContext as FiguresViewModel)!.SelectedFigureViewModel = (TriangleViewModel)polygon.DataContext;
                     break;
-                case Rectangle rectangle:
-                    (DataContext as FiguresViewModel)!.SelectedFigureViewModel = (SquareViewModel)rectangle.DataContext;
+                case Path rectangle:
+                    (DataContext as FiguresViewModel)!.SelectedFigureViewModel = (RectangleViewModel)rectangle.DataContext;
                     break;
                 case null:
                     break;

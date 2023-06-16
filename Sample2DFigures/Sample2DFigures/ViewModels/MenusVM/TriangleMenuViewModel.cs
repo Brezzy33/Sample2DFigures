@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using Sample2DFigures.ViewModels.FiguresVM;
 
 namespace Sample2DFigures.ViewModels.MenusVM
 {
@@ -77,7 +78,7 @@ namespace Sample2DFigures.ViewModels.MenusVM
 
         private void AddFigure()
         {
-            _figuresViewModel.TriangleCollection.Add(new TriangleViewModel(
+            _figuresViewModel.FiguresCollection.Add(new TriangleViewModel(
                 Triangle.CreateInstance(
                     new Point(Point1.X, Point1.Y),
                     new Point(Point2.X, Point2.Y), 

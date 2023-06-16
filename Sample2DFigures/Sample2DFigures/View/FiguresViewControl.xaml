@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="\View\SquareMenuTemplate.xaml"/>
+                <ResourceDictionary Source="\View\RectangleMenuTemplate.xaml"/>
                 <ResourceDictionary Source="\View\TriangleMenuTemplate.xaml"/>
                 <ResourceDictionary Source="\Style\CustomListBoxItemStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -46,9 +46,9 @@
                 <MenuItem Header="Triangles"
                           Margin="5"
                           Command="{Binding ShowTriangleMenuCommand}" />
-                <MenuItem Header="Squares"
+                <MenuItem Header="Rectangles"
                           Margin="5"
-                          Command="{Binding ShowSquareMenuCommand}" />
+                          Command="{Binding ShowRectangleMenuCommand}" />
             </Menu>
 
             <ContentControl Grid.Column="0"
@@ -70,46 +70,41 @@
             </StackPanel>
         </Grid>
 
-        <Canvas Grid.Column="1"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
+        <ListBox ItemsSource="{Binding FiguresCollection}"
+                 BorderThickness="0"
+                 Grid.Column="1"
+                 ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
 
-            <ListBox ItemsSource="{Binding TriangleCollection}"
-                     BorderThickness="0"
-                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
                         <Polygon Stroke="Black"
                                  StrokeThickness="2"
                                  FillRule="EvenOdd"
                                  MouseLeftButtonDown="SelectedFigure_OnMouseLeftButtonDown"
                                  Points="{Binding Path=TrianglePoints}">
                             <Polygon.Fill>
-                                <SolidColorBrush Color="Blue" Opacity="0.4"/>
+                                <SolidColorBrush Color="Blue" Opacity="0.4" />
                             </Polygon.Fill>
                         </Polygon>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
 
-            <ListBox ItemsSource="{Binding SquareCollection}"
-                     BorderThickness="0"
-                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Rectangle Stroke="Black"
-                                   Height="{Binding Height}"
-                                   Width="{Binding Width}"
-                                   MouseLeftButtonUp="SelectedFigure_OnMouseLeftButtonDown">
-                            <Rectangle.Fill>
-                                <SolidColorBrush Color="Green" Opacity="0.4" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Canvas>
+                        <Path Fill="Green" Opacity="0.4"
+                              Stroke="Black"
+                              StrokeThickness="2"
+                              MouseLeftButtonUp="SelectedFigure_OnMouseLeftButtonDown">
+                            <Path.Data>
+                                <RectangleGeometry Rect="{Binding RectangleParameters}" />
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
