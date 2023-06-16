@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Sample2DFigures.Model
 {
-    internal class Triangle : GeometryFigure, ITriangle
+    internal class Triangle : BaseGeometryFigure, ITriangle
     {
         public Point Point1 { get; }
 

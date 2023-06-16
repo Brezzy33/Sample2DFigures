@@ -2,7 +2,7 @@
 
 namespace Sample2DFigures.Interfaces
 {
-    internal interface IRectangle : IFigure
+    internal interface IRectangle
     {
         int Width { get; }
         int Height { get; }

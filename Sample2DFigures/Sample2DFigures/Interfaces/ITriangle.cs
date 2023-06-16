@@ -2,7 +2,7 @@
 
 namespace Sample2DFigures.Interfaces
 {
-    internal interface ITriangle : IFigure
+    internal interface ITriangle
     {
         Point Point1 { get; }
 

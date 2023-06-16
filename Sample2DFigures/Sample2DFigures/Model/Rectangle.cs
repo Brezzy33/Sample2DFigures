@@ -3,7 +3,7 @@ using Sample2DFigures.Interfaces;
 
 namespace Sample2DFigures.Model
 {
-    internal class Rectangle : GeometryFigure, IRectangle
+    internal class Rectangle : BaseGeometryFigure, IRectangle
     {
         public int Height { get; }
 
