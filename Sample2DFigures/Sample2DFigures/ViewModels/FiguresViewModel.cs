@@ -20,6 +20,11 @@ namespace Sample2DFigures.ViewModels
         private ICommand _showTriangleMenuCommand;
         public ICommand ShowTriangleMenuCommand => _showTriangleMenuCommand ??= new RelayCommand(() => SelectedMenuModel = _menus[0]);
 
+        public ICommand AddFigureCommand => SelectedMenuModel.AddFigureCommand;
+
+        private ICommand _removeFigureCommand;
+        public ICommand RemoveFigureCommand => _removeFigureCommand ??= new RelayCommand(RemoveFigure);
+
         #endregion
 
         public FiguresViewModel()
@@ -32,6 +37,7 @@ namespace Sample2DFigures.ViewModels
                 {0, new TriangleMenuViewModel(this)},
                 {1, new SquareMenuViewModel(this)}
             };
+            SelectedMenuModel = _menus[0];
         }
 
         public ObservableCollection<TriangleViewModel?> TriangleCollection { get; set; }
@@ -62,7 +68,23 @@ namespace Sample2DFigures.ViewModels
                 {
                     _selectedMenuModel = value;
                     OnPropertyChanged();
+                    OnPropertyChanged("AddFigureCommand");
                 }
+            }
+        }
+
+        private void RemoveFigure()
+        {
+            switch (SelectedFigureViewModel)
+            {
+                case TriangleViewModel:
+                    TriangleCollection.Remove((TriangleViewModel?)SelectedFigureViewModel);
+                    break;
+                case SquareViewModel:
+                    SquareCollection.Remove((SquareViewModel)SelectedFigureViewModel);
+                    break;
+                case null:
+                    break;
             }
         }
 

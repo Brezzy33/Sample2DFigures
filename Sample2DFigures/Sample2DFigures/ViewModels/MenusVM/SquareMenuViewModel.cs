@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Sample2DFigures.Common;
 using Sample2DFigures.Model;
 
 namespace Sample2DFigures.ViewModels.MenusVM
@@ -40,6 +42,27 @@ namespace Sample2DFigures.ViewModels.MenusVM
             }
         }
 
+        private CustomPoint _startPoint = new(0,0);
+        public CustomPoint StartPoint
+        {
+            get => _startPoint;
+            set
+            {
+                if (_startPoint != value)
+                {
+                    _startPoint = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        #region Command
+
+        private ICommand _addSquareCommand;
+        public ICommand AddFigureCommand => _addSquareCommand ??= new RelayCommand(AddFigure);
+
+        #endregion
+
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -51,15 +74,9 @@ namespace Sample2DFigures.ViewModels.MenusVM
 
         #endregion
 
-        public void AddFigure()
+        private void AddFigure()
         {
             _figuresViewModel.SquareCollection.Add(new SquareViewModel(Square.CreateInstance(Height, Width)));
-        }
-
-        public void RemoveFigure()
-        {
-            if (_figuresViewModel.SelectedFigureViewModel is SquareViewModel squareViewModel)
-                _figuresViewModel.SquareCollection.Remove(squareViewModel);
         }
     }
 }

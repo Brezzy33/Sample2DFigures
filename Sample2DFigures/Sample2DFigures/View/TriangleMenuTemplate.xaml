@@ -3,119 +3,109 @@
                     xmlns:menusVm="clr-namespace:Sample2DFigures.ViewModels.MenusVM">
 
     <DataTemplate DataType="{x:Type menusVm:TriangleMenuViewModel}">
-        <Grid>
+        <Grid Grid.IsSharedSizeScope="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
             <Grid VerticalAlignment="Top"
                   Grid.Row="0"
                   Grid.Column="0">
+
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn2"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="X: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="X: "
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point1.X}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
+                <TextBox Text="{Binding Point1.X}"
+                         Grid.Column="1"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
 
-                    <Label Content="Y: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="Y: "
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point1.Y}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
-                </StackPanel>
+                <TextBox Text="{Binding Point1.Y}"
+                         Grid.Column="3"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
             </Grid>
 
             <Grid VerticalAlignment="Top"
-              Grid.Row="1"
-              Grid.Column="0">
+                  Grid.Row="1"
+                  Grid.Column="0">
+
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn2"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="X: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="X: "
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point2.X}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
+                <TextBox Text="{Binding Point2.X}"
+                         Grid.Column="1"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
 
-                    <Label Content="Y: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="Y: "
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point2.Y}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
-                </StackPanel>
+                <TextBox Text="{Binding Point2.Y}"
+                         Grid.Column="3"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
             </Grid>
 
             <Grid VerticalAlignment="Top"
-              Grid.Row="2"
-              Grid.Column="0">
+                  Grid.Row="2"
+                  Grid.Column="0">
+
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn2"/>
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="X: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="X: "
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point3.X}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
+                <TextBox Text="{Binding Point3.X}"
+                         Grid.Column="1"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
 
-                    <Label Content="Y: "
-                           Grid.Column="0"
-                           HorizontalAlignment="Left"
-                           Margin="5,5,0,0" />
+                <Label Content="Y: "
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Margin="5,5,0,0" />
 
-                    <TextBox Text="{Binding Point3.Y}"
-                             Grid.Column="1"
-                             MinWidth="40"
-                             Margin="5,5,5,0" />
-                </StackPanel>
+                <TextBox Text="{Binding Point3.Y}"
+                         Grid.Column="3"
+                         MinWidth="40"
+                         Margin="5,5,5,0" />
             </Grid>
-
-            <StackPanel Orientation="Horizontal"
-                        Grid.Column="0"
-                        HorizontalAlignment="Right"
-                        Grid.Row="3">
-                <Button Content="Add"
-                        Margin="5"
-                        MinWidth="50" 
-                        Command="{Binding AddTriangleCommand}"/>
-                <Button Content="Remove"
-                        Margin="5"
-                        MinWidth="50" 
-                        Command="{Binding RemoveSelectedTriangleCommand}"/>
-            </StackPanel>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

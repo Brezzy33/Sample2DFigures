@@ -60,10 +60,7 @@ namespace Sample2DFigures.ViewModels.MenusVM
         #region Commands
 
         private ICommand _addTriangleCommand;
-        public ICommand AddTriangleCommand => _addTriangleCommand ??= new RelayCommand(AddFigure);
-
-        private ICommand _removeSelectedTriangleCommand;
-        public ICommand RemoveSelectedTriangleCommand => _removeSelectedTriangleCommand ??= new RelayCommand(RemoveFigure);
+        public ICommand AddFigureCommand => _addTriangleCommand ??= new RelayCommand(AddFigure);
 
         #endregion
         
@@ -78,7 +75,7 @@ namespace Sample2DFigures.ViewModels.MenusVM
 
         #endregion
 
-        public void AddFigure()
+        private void AddFigure()
         {
             _figuresViewModel.TriangleCollection.Add(new TriangleViewModel(
                 Triangle.CreateInstance(
@@ -86,12 +83,6 @@ namespace Sample2DFigures.ViewModels.MenusVM
                     new Point(Point2.X, Point2.Y), 
                     new Point(Point3.X, Point3.Y)
                     )));
-        }
-
-        public void RemoveFigure()
-        {
-            if(_figuresViewModel.SelectedFigureViewModel is TriangleViewModel triangleViewModel) 
-                _figuresViewModel.TriangleCollection.Remove(triangleViewModel);
         }
     }
 }

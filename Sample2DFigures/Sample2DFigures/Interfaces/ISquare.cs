@@ -2,6 +2,7 @@
 {
     internal interface ISquare : IFigure
     {
-
+        int Width { get; }
+        int Height { get; }
     }
 }

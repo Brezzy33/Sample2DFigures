@@ -1,9 +1,9 @@
-﻿namespace Sample2DFigures.ViewModels.MenusVM
+﻿using System.Windows.Input;
+
+namespace Sample2DFigures.ViewModels.MenusVM
 {
     internal interface IMenuModel
     {
-        public void AddFigure();
-
-        public void RemoveFigure();
+        public ICommand AddFigureCommand { get; }
     }
 }

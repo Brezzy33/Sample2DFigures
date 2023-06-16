@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Sample2DFigures.View.FiguresView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Sample2DFigures.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModels:FiguresViewModel}">
+
+    <UserControl.DataContext>
+        <viewModels:FiguresViewModel/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="\View\SquareMenuTemplate.xaml"/>
+                <ResourceDictionary Source="\View\TriangleMenuTemplate.xaml"/>
+                <ResourceDictionary Source="\Style\CustomListBoxItemStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}">
+                <EventSetter Event="PreviewTextInput" Handler="EventSetter_OnHandler" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Menu 
+                  Grid.ColumnSpan="2"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <MenuItem Header="Triangles"
+                          Margin="5"
+                          Command="{Binding ShowTriangleMenuCommand}" />
+                <MenuItem Header="Squares"
+                          Margin="5"
+                          Command="{Binding ShowSquareMenuCommand}" />
+            </Menu>
+
+            <ContentControl Grid.Column="0"
+                            Grid.Row="1"
+                            Content="{Binding SelectedMenuModel}" />
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="0"
+                        HorizontalAlignment="Right"
+                        Grid.Row="2">
+                <Button Content="Add"
+                        Margin="5"
+                        MinWidth="50" 
+                        Command="{Binding AddFigureCommand}"/>
+                <Button Content="Remove"
+                        Margin="5"
+                        MinWidth="50" 
+                        Command="{Binding RemoveFigureCommand}"/>
+            </StackPanel>
+        </Grid>
+
+        <Canvas Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+
+            <ListBox ItemsSource="{Binding TriangleCollection}"
+                     BorderThickness="0"
+                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Polygon Stroke="Black"
+                                 StrokeThickness="2"
+                                 FillRule="EvenOdd"
+                                 MouseLeftButtonDown="SelectedFigure_OnMouseLeftButtonDown"
+                                 Points="{Binding Path=TrianglePoints}">
+                            <Polygon.Fill>
+                                <SolidColorBrush Color="Blue" Opacity="0.4"/>
+                            </Polygon.Fill>
+                        </Polygon>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <ListBox ItemsSource="{Binding SquareCollection}"
+                     BorderThickness="0"
+                     ItemContainerStyle="{StaticResource ListBoxItemStyleTransparentSelect}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Stroke="Black"
+                                   Height="{Binding Height}"
+                                   Width="{Binding Width}"
+                                   MouseLeftButtonUp="SelectedFigure_OnMouseLeftButtonDown">
+                            <Rectangle.Fill>
+                                <SolidColorBrush Color="Green" Opacity="0.4" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Canvas>
+    </Grid>
+</UserControl>
